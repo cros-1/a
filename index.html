@@ -6,8 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>النماذج الميدانية</title>
 <style>
+
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Segoe UI',Tahoma,sans-serif;background:#f0f4f8;color:#1c2833;min-height:100vh;}
+body{font-family:‘Segoe UI’,Tahoma,sans-serif;background:#f0f4f8;color:#1c2833;min-height:100vh;}
 .page{display:none;min-height:100vh;background:#f0f4f8;}
 .hdr{color:#fff;padding:20px 16px 16px;text-align:center;background:linear-gradient(135deg,#1a5276,#1f618d);box-shadow:0 3px 10px rgba(0,0,0,.2);}
 .hdr h1{font-size:1.3rem;font-weight:700;margin-bottom:3px;}
@@ -58,6 +59,7 @@ textarea{resize:vertical;min-height:54px;}
 .nr .nn{font-size:.78rem;color:#7f8c8d;width:22px;flex-shrink:0;text-align:center;font-weight:700;}
 .nr input{flex:1;}
 .rm{background:none;border:none;color:#e74c3c;cursor:pointer;font-size:1rem;padding:0 3px;}
+
 </style>
 </head>
 <body>
@@ -288,391 +290,388 @@ textarea{resize:vertical;min-height:54px;}
   </div>
 </div>
 
-</body>
-</html>
-
-</body>
-</html>
 <script>
+
 document.addEventListener('DOMContentLoaded', function() {
   "use strict";
 
-// ── show/hide pages ──
-function show(id) {
-document.getElementById(‘pg-home’).style.display = ‘none’;
-var pages = document.getElementsByClassName(‘page’);
-for (var i = 0; i < pages.length; i++) pages[i].style.display = ‘none’;
-var pg = document.getElementById(id);
-if (pg) pg.style.display = ‘block’;
-window.scrollTo(0,0);
-document.body.scrollTop = 0;
-document.documentElement.scrollTop = 0;
-}
+  // ── show/hide pages ──
+  function show(id) {
+    document.getElementById('pg-home').style.display = 'none';
+    var pages = document.getElementsByClassName('page');
+    for (var i = 0; i < pages.length; i++) pages[i].style.display = 'none';
+    var pg = document.getElementById(id);
+    if (pg) pg.style.display = 'block';
+    window.scrollTo(0,0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
 
-// ── WhatsApp sender ──
-function wa(msg) {
-if (navigator.share) {
-navigator.share({ text: msg }).catch(function() { waFB(msg); });
-} else { waFB(msg); }
-}
-function waFB(msg) {
-if (navigator.clipboard && navigator.clipboard.writeText) {
-navigator.clipboard.writeText(msg).then(function() {
-if (confirm(‘تم نسخ الرسالة.\nافتح واتساب والصق الرسالة.’)) {
-window.open(‘whatsapp://send’, ‘_blank’);
-}
-}).catch(function() { waURL(msg); });
-} else { waURL(msg); }
-}
-function waURL(msg) {
-window.open(‘https://wa.me/?text=’ + encodeURIComponent(msg), ‘_blank’);
-}
+  // ── WhatsApp sender ──
+  function wa(msg) {
+    if (navigator.share) {
+      navigator.share({ text: msg }).catch(function() { waFB(msg); });
+    } else { waFB(msg); }
+  }
+  function waFB(msg) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(msg).then(function() {
+        if (confirm('تم نسخ الرسالة.\nافتح واتساب والصق الرسالة.')) {
+          window.open('whatsapp://send', '_blank');
+        }
+      }).catch(function() { waURL(msg); });
+    } else { waURL(msg); }
+  }
+  function waURL(msg) {
+    window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+  }
 
-// ── helpers ──
-function gv(id) { var e = document.getElementById(id); return e ? e.value.trim() : ‘’; }
-function el(id) { return document.getElementById(id); }
-function on(id, ev, fn) {
-var e = document.getElementById(id);
-if (e) e.addEventListener(ev, fn);
-}
-function mk(tag, props, css) {
-var e = document.createElement(tag);
-if (props) Object.keys(props).forEach(function(k) { e[k] = props[k]; });
-if (css) e.style.cssText = css;
-return e;
-}
+  // ── helpers ──
+  function gv(id) { var e = document.getElementById(id); return e ? e.value.trim() : ''; }
+  function el(id) { return document.getElementById(id); }
+  function on(id, ev, fn) {
+    var e = document.getElementById(id);
+    if (e) e.addEventListener(ev, fn);
+  }
+  function mk(tag, props, css) {
+    var e = document.createElement(tag);
+    if (props) Object.keys(props).forEach(function(k) { e[k] = props[k]; });
+    if (css) e.style.cssText = css;
+    return e;
+  }
 
-// ── Navigation ──
-on(‘btn-go-shift’,  ‘click’, function() { show(‘pg-shift’);  });
-on(‘btn-go-moshr’,  ‘click’, function() { show(‘pg-moshr’);  });
-on(‘btn-go-oil’,    ‘click’, function() { show(‘pg-oil’);    });
-on(‘btn-go-device’, ‘click’, function() { show(‘pg-device’); });
-on(‘btn-go-vm’,     ‘click’, function() { show(‘pg-vm’);     });
-on(‘btn-go-rosc’,   ‘click’, function() { show(‘pg-rosc’);   });
+  // ── Navigation ──
+  on('btn-go-shift',  'click', function() { show('pg-shift');  });
+  on('btn-go-moshr',  'click', function() { show('pg-moshr');  });
+  on('btn-go-oil',    'click', function() { show('pg-oil');    });
+  on('btn-go-device', 'click', function() { show('pg-device'); });
+  on('btn-go-vm',     'click', function() { show('pg-vm');     });
+  on('btn-go-rosc',   'click', function() { show('pg-rosc');   });
 
-function goHome() {
-var all = document.getElementsByClassName(‘page’);
-for (var i = 0; i < all.length; i++) all[i].style.display = ‘none’;
-var h = document.getElementById(‘pg-home’);
-if (h) h.style.display = ‘block’;
-window.scrollTo(0,0);
-}
-[‘shift’,‘moshr’,‘oil’,‘device’,‘vm’,‘rosc’].forEach(function(p) {
-on(‘bk-’+p, ‘click’, goHome);
-});
+  function goHome() {
+    var all = document.getElementsByClassName('page');
+    for (var i = 0; i < all.length; i++) all[i].style.display = 'none';
+    var h = document.getElementById('pg-home');
+    if (h) h.style.display = 'block';
+    window.scrollTo(0,0);
+  }
+  ['shift','moshr','oil','device','vm','rosc'].forEach(function(p) {
+    on('bk-'+p, 'click', goHome);
+  });
 
-// ── Init dates ──
-var today = new Date().toISOString().split(‘T’)[0];
-[‘s-date’,‘o-d’,‘d-d’,‘v-d’,‘m-d’].forEach(function(id) {
-var e = el(id); if (e) e.value = today;
-});
+  // ── Init dates ──
+  var today = new Date().toISOString().split('T')[0];
+  ['s-date','o-d','d-d','v-d','m-d'].forEach(function(id) {
+    var e = el(id); if (e) e.value = today;
+  });
 
-// ════════════════════════════════════════
-// SHIFT FORM
-// ════════════════════════════════════════
-var sCount = 0, sSecs = {};
+  // ════════════════════════════════════════
+  // SHIFT FORM
+  // ════════════════════════════════════════
+  var sCount = 0, sSecs = {};
 
-function sRenderIncs(sid) {
-var c = el(‘si’+sid); if (!c) return;
-c.innerHTML = ‘’;
-sSecs[sid].incs.forEach(function(inc, idx) {
-var blk = mk(‘div’); blk.className = ‘iblk’;
-var row = mk(‘div’, null, ‘display:flex;align-items:center;gap:8px’);
-var lbl = mk(‘span’, {textContent:‘استجابة أولية ‘+inc.n+’:’}, ‘font-weight:700;font-size:.88rem;white-space:nowrap’);
-var inp = mk(‘input’, {type:‘text’, placeholder:‘رقم البلاغ أو ملاحظة’, value:inc.note||’’}, ‘flex:1;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;direction:rtl;background:#f9fbfc;’);
-inp.addEventListener(‘input’, (function(s,i){return function(){sSecs[s].incs[i].note=this.value;};})(sid,idx));
-var btn = mk(‘button’, {textContent:‘حذف’}, ‘background:#e74c3c;color:#fff;border:none;border-radius:5px;padding:4px 10px;cursor:pointer;font-size:.8rem;white-space:nowrap;’);
-btn.addEventListener(‘click’, (function(s,i){return function(){sSecs[s].incs.splice(i,1);sRenderIncs(s);};})(sid,idx));
-row.appendChild(lbl); row.appendChild(inp); row.appendChild(btn);
-blk.appendChild(row); c.appendChild(blk);
-});
-}
+  function sRenderIncs(sid) {
+    var c = el('si'+sid); if (!c) return;
+    c.innerHTML = '';
+    sSecs[sid].incs.forEach(function(inc, idx) {
+      var blk = mk('div'); blk.className = 'iblk';
+      var row = mk('div', null, 'display:flex;align-items:center;gap:8px');
+      var lbl = mk('span', {textContent:'استجابة أولية '+inc.n+':'}, 'font-weight:700;font-size:.88rem;white-space:nowrap');
+      var inp = mk('input', {type:'text', placeholder:'رقم البلاغ أو ملاحظة', value:inc.note||''}, 'flex:1;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;direction:rtl;background:#f9fbfc;');
+      inp.addEventListener('input', (function(s,i){return function(){sSecs[s].incs[i].note=this.value;};})(sid,idx));
+      var btn = mk('button', {textContent:'حذف'}, 'background:#e74c3c;color:#fff;border:none;border-radius:5px;padding:4px 10px;cursor:pointer;font-size:.8rem;white-space:nowrap;');
+      btn.addEventListener('click', (function(s,i){return function(){sSecs[s].incs.splice(i,1);sRenderIncs(s);};})(sid,idx));
+      row.appendChild(lbl); row.appendChild(inp); row.appendChild(btn);
+      blk.appendChild(row); c.appendChild(blk);
+    });
+  }
 
-function sAddInc(sid) { sCount++; sSecs[sid].incs.push({n:sCount,note:’’}); sRenderIncs(sid); }
-function sBulk(sid,n) { for(var i=0;i<n;i++){sCount++;sSecs[sid].incs.push({n:sCount,note:’’});} sRenderIncs(sid); }
+  function sAddInc(sid) { sCount++; sSecs[sid].incs.push({n:sCount,note:''}); sRenderIncs(sid); }
+  function sBulk(sid,n) { for(var i=0;i<n;i++){sCount++;sSecs[sid].incs.push({n:sCount,note:''});} sRenderIncs(sid); }
 
-function sRender() {
-var c = el(‘s-secs’); if (!c) return;
-c.innerHTML = ‘’;
-Object.keys(sSecs).forEach(function(sid) {
-var s = sSecs[sid], wrap = mk(‘div’, null, ‘margin-bottom:13px’);
-var hdr = mk(‘div’); hdr.className = ‘shdr’;
-var lbl = mk(‘span’, {textContent:‘القطاع:’});
-var sinp = mk(‘input’, {type:‘text’, value:s.name}, ‘background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:4px;padding:2px 6px;font-size:.8rem;width:120px;text-align:right;direction:rtl;’);
-sinp.addEventListener(‘input’, (function(id){return function(){sSecs[id].name=this.value;};})(sid));
-var dbtn = mk(‘button’, {textContent:‘🗑’}, ‘background:none;border:none;color:#fff;cursor:pointer;font-size:1rem;’);
-dbtn.addEventListener(‘click’, (function(id){return function(){delete sSecs[id];sRender();};})(sid));
-hdr.appendChild(lbl); hdr.appendChild(sinp); hdr.appendChild(dbtn);
-wrap.appendChild(hdr);
-var idiv = mk(‘div’); idiv.id = ‘si’+sid; wrap.appendChild(idiv);
-var sd = mk(‘div’, null, ‘margin-top:9px’);
-sd.innerHTML = ‘<div style="font-weight:700;font-size:.86rem;margin-bottom:4px">استجابة داعمة:</div>’;
-var sta = mk(‘textarea’, null, ‘width:100%;min-height:48px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;resize:vertical;direction:rtl;background:#f9fbfc;’);
-sta.id = ‘sup’+sid; sd.appendChild(sta); wrap.appendChild(sd);
-var cd = mk(‘div’, null, ‘margin-top:9px;margin-bottom:9px’);
-cd.innerHTML = ‘<div style="font-weight:700;font-size:.86rem;margin-bottom:4px">استجابة ملغية:</div>’;
-var cta = mk(‘textarea’, null, ‘width:100%;min-height:48px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;resize:vertical;direction:rtl;background:#f9fbfc;’);
-cta.id = ‘can’+sid; cd.appendChild(cta); wrap.appendChild(cd);
-var bar = mk(‘div’); bar.className = ‘add-bar’;
-var b1 = mk(‘button’, {textContent:‘➕ إضافة استجابة أولية’}); b1.className=‘btn bp bsm’;
-b1.addEventListener(‘click’, (function(id){return function(){sAddInc(id);};})(sid));
-var b2 = mk(‘button’, {textContent:‘إضافة 5’}); b2.className=‘btn bo2 bsm’;
-b2.addEventListener(‘click’, (function(id){return function(){sBulk(id,5);};})(sid));
-var b3 = mk(‘button’, {textContent:‘أضف 1..7’}); b3.className=‘btn bo2 bsm’;
-b3.addEventListener(‘click’, (function(id){return function(){sBulk(id,7);};})(sid));
-bar.appendChild(b1); bar.appendChild(b2); bar.appendChild(b3);
-wrap.appendChild(bar); c.appendChild(wrap);
-sRenderIncs(sid);
-});
-}
+  function sRender() {
+    var c = el('s-secs'); if (!c) return;
+    c.innerHTML = '';
+    Object.keys(sSecs).forEach(function(sid) {
+      var s = sSecs[sid], wrap = mk('div', null, 'margin-bottom:13px');
+      var hdr = mk('div'); hdr.className = 'shdr';
+      var lbl = mk('span', {textContent:'القطاع:'});
+      var sinp = mk('input', {type:'text', value:s.name}, 'background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:4px;padding:2px 6px;font-size:.8rem;width:120px;text-align:right;direction:rtl;');
+      sinp.addEventListener('input', (function(id){return function(){sSecs[id].name=this.value;};})(sid));
+      var dbtn = mk('button', {textContent:'🗑'}, 'background:none;border:none;color:#fff;cursor:pointer;font-size:1rem;');
+      dbtn.addEventListener('click', (function(id){return function(){delete sSecs[id];sRender();};})(sid));
+      hdr.appendChild(lbl); hdr.appendChild(sinp); hdr.appendChild(dbtn);
+      wrap.appendChild(hdr);
+      var idiv = mk('div'); idiv.id = 'si'+sid; wrap.appendChild(idiv);
+      var sd = mk('div', null, 'margin-top:9px');
+      sd.innerHTML = '<div style="font-weight:700;font-size:.86rem;margin-bottom:4px">استجابة داعمة:</div>';
+      var sta = mk('textarea', null, 'width:100%;min-height:48px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;resize:vertical;direction:rtl;background:#f9fbfc;');
+      sta.id = 'sup'+sid; sd.appendChild(sta); wrap.appendChild(sd);
+      var cd = mk('div', null, 'margin-top:9px;margin-bottom:9px');
+      cd.innerHTML = '<div style="font-weight:700;font-size:.86rem;margin-bottom:4px">استجابة ملغية:</div>';
+      var cta = mk('textarea', null, 'width:100%;min-height:48px;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;resize:vertical;direction:rtl;background:#f9fbfc;');
+      cta.id = 'can'+sid; cd.appendChild(cta); wrap.appendChild(cd);
+      var bar = mk('div'); bar.className = 'add-bar';
+      var b1 = mk('button', {textContent:'➕ إضافة استجابة أولية'}); b1.className='btn bp bsm';
+      b1.addEventListener('click', (function(id){return function(){sAddInc(id);};})(sid));
+      var b2 = mk('button', {textContent:'إضافة 5'}); b2.className='btn bo2 bsm';
+      b2.addEventListener('click', (function(id){return function(){sBulk(id,5);};})(sid));
+      var b3 = mk('button', {textContent:'أضف 1..7'}); b3.className='btn bo2 bsm';
+      b3.addEventListener('click', (function(id){return function(){sBulk(id,7);};})(sid));
+      bar.appendChild(b1); bar.appendChild(b2); bar.appendChild(b3);
+      wrap.appendChild(bar); c.appendChild(wrap);
+      sRenderIncs(sid);
+    });
+  }
 
-function sAddSec(nm) {
-var id = ‘sc’+Date.now()+Math.random().toString(36).slice(2);
-sSecs[id] = {name:nm||’’,incs:[]}; sRender();
-}
-on(‘btn-add-sec’,‘click’,function(){sAddSec(’’);});
-sAddSec(‘الوسط’);
+  function sAddSec(nm) {
+    var id = 'sc'+Date.now()+Math.random().toString(36).slice(2);
+    sSecs[id] = {name:nm||'',incs:[]}; sRender();
+  }
+  on('btn-add-sec','click',function(){sAddSec('');});
+  sAddSec('الوسط');
 
-function addPerson(listId) {
-var c = el(listId); if(!c) return;
-var d = mk(‘div’); d.className=‘pi’;
-var inp = mk(‘input’,{type:‘text’,placeholder:‘الاسم الكامل’},‘flex:1;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;direction:rtl;background:#f9fbfc;’);
-var btn = mk(‘button’,{textContent:‘✕’}); btn.className=‘rm’;
-btn.addEventListener(‘click’,function(){d.parentNode.removeChild(d);});
-d.appendChild(inp); d.appendChild(btn); c.appendChild(d); inp.focus();
-}
-on(‘btn-add-abs’,‘click’,function(){addPerson(‘s-abs’);});
-on(‘btn-add-lat’,‘click’,function(){addPerson(‘s-lat’);});
+  function addPerson(listId) {
+    var c = el(listId); if(!c) return;
+    var d = mk('div'); d.className='pi';
+    var inp = mk('input',{type:'text',placeholder:'الاسم الكامل'},'flex:1;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;direction:rtl;background:#f9fbfc;');
+    var btn = mk('button',{textContent:'✕'}); btn.className='rm';
+    btn.addEventListener('click',function(){d.parentNode.removeChild(d);});
+    d.appendChild(inp); d.appendChild(btn); c.appendChild(d); inp.focus();
+  }
+  on('btn-add-abs','click',function(){addPerson('s-abs');});
+  on('btn-add-lat','click',function(){addPerson('s-lat');});
 
-on(‘btn-s-send’,‘click’,function(){
-var per = document.querySelector(‘input[name=“sp”]:checked’);
-var m = ‘’;
-m += ‘📋 *نموذج نهاية المناوبة*\n’;
-m += ‘📅 ‘+(gv(‘s-date’)||’—’)+’   🕐 ‘+(per?per.value:’—’)+’\n’;
-m += ‘\n📊 *الموشر*\n’;
-m += ‘⏱ متوسط الاستجابة: *’+(gv(‘s-ir’)||’—’)+’ دقيقة*\n’;
-var iN=gv(‘s-in’); if(iN) m+=‘📝 ‘+iN+’\n’;
-m += ‘\n🚗 *المركبات*\n’;
-m += ‘✅ عاملة: *’+(gv(‘s-vw’)||’—’)+’*\n’;
-m += ‘🔄 احتياط: *’+(gv(‘s-vr’)||’—’)+’*\n’;
-m += ‘🔧 متعطلة: *’+(gv(‘s-vb’)||’—’)+’*\n’;
-var vN=gv(‘s-vn’); if(vN) m+=‘⚠️ ‘+vN+’\n’;
-m += ‘\n📋 *البلاغات*\n’;
-Object.keys(sSecs).forEach(function(sid){
-var s=sSecs[sid];
-m += ‘\n▪️ *القطاع: ‘+s.name+’*\n’;
-if(!s.incs.length){ m+=’*لا توجد بلاغات*\n’; }
-else { s.incs.forEach(function(inc){ m+=‘🔹 استجابة ‘+inc.n+’: ‘+(inc.note||’—’)+’\n’; }); }
-var se=el(‘sup’+sid), ce=el(‘can’+sid);
-if(se&&se.value.trim()) m+=‘🟢 داعمة: ‘+se.value.trim()+’\n’;
-if(ce&&ce.value.trim()) m+=‘🔴 ملغية: ‘+ce.value.trim()+’\n’;
-});
-var abs=[].slice.call(document.querySelectorAll(’#s-abs input’)).map(function(x){return x.value.trim();}).filter(Boolean);
-var lat=[].slice.call(document.querySelectorAll(’#s-lat input’)).map(function(x){return x.value.trim();}).filter(Boolean);
-if(abs.length||lat.length){
-m += ‘\n👤 *الغياب والمتأخرين*\n’;
-if(abs.length) m+=‘🚫 غياب: *’+abs.join(’، ‘)+’*\n’;
-if(lat.length) m+=‘⏱ متأخرون: *’+lat.join(’، ‘)+’*\n’;
-}
-var gn=gv(‘s-gn’); if(gn){ m+=’\n📝 *ملاحظات عامة*\n’+gn+’\n’; }
-m += ‘\n👥 *الطاقم*\n’;
-m += ‘🎖 كبير المسعفين: *’+(gv(‘s-ch’)||’—’)+’*\n’;
-m += ‘🤝 المساعد: *’+(gv(‘s-as’)||’—’)+’*’;
-wa(m);
-});
+  on('btn-s-send','click',function(){
+    var per = document.querySelector('input[name="sp"]:checked');
+    var m = '';
+    m += '📋 *نموذج نهاية المناوبة*\n';
+    m += '📅 '+(gv('s-date')||'—')+'   🕐 '+(per?per.value:'—')+'\n';
+    m += '\n📊 *الموشر*\n';
+    m += '⏱ متوسط الاستجابة: *'+(gv('s-ir')||'—')+' دقيقة*\n';
+    var iN=gv('s-in'); if(iN) m+='📝 '+iN+'\n';
+    m += '\n🚗 *المركبات*\n';
+    m += '✅ عاملة: *'+(gv('s-vw')||'—')+'*\n';
+    m += '🔄 احتياط: *'+(gv('s-vr')||'—')+'*\n';
+    m += '🔧 متعطلة: *'+(gv('s-vb')||'—')+'*\n';
+    var vN=gv('s-vn'); if(vN) m+='⚠️ '+vN+'\n';
+    m += '\n📋 *البلاغات*\n';
+    Object.keys(sSecs).forEach(function(sid){
+      var s=sSecs[sid];
+      m += '\n▪️ *القطاع: '+s.name+'*\n';
+      if(!s.incs.length){ m+='_لا توجد بلاغات_\n'; }
+      else { s.incs.forEach(function(inc){ m+='🔹 استجابة '+inc.n+': '+(inc.note||'—')+'\n'; }); }
+      var se=el('sup'+sid), ce=el('can'+sid);
+      if(se&&se.value.trim()) m+='🟢 داعمة: '+se.value.trim()+'\n';
+      if(ce&&ce.value.trim()) m+='🔴 ملغية: '+ce.value.trim()+'\n';
+    });
+    var abs=[].slice.call(document.querySelectorAll('#s-abs input')).map(function(x){return x.value.trim();}).filter(Boolean);
+    var lat=[].slice.call(document.querySelectorAll('#s-lat input')).map(function(x){return x.value.trim();}).filter(Boolean);
+    if(abs.length||lat.length){
+      m += '\n👤 *الغياب والمتأخرين*\n';
+      if(abs.length) m+='🚫 غياب: *'+abs.join('، ')+'*\n';
+      if(lat.length) m+='⏱ متأخرون: *'+lat.join('، ')+'*\n';
+    }
+    var gn=gv('s-gn'); if(gn){ m+='\n📝 *ملاحظات عامة*\n'+gn+'\n'; }
+    m += '\n👥 *الطاقم*\n';
+    m += '🎖 كبير المسعفين: *'+(gv('s-ch')||'—')+'*\n';
+    m += '🤝 المساعد: *'+(gv('s-as')||'—')+'*';
+    wa(m);
+  });
 
-// ════════════════════════════════════════
-// MOSHR
-// ════════════════════════════════════════
-function mBuild() {
-var per = document.querySelector(‘input[name=“mp”]:checked’);
-var ph = el(‘m-ph’);
-var m = ‘’;
-m += ‘📊 *مؤشر المناوبة — قطاع الوسط*\n’;
-m += ‘📅 ‘+(gv(‘m-d’)||’—’)+’   🕐 ‘+(per?per.value:’—’)+’\n’;
-m += ‘⏱ متوسط وقت الاستجابة: *’+(gv(‘m-r’)||’—’)+’*\n’;
-if(ph&&ph.value) m+=’\n’+ph.value;
-return m;
-}
-function mPrev(){ var e=el(‘m-prev’); if(e) e.textContent=mBuild(); }
-on(‘m-d’,‘input’,mPrev);
-on(‘m-r’,‘input’,mPrev);
-on(‘m-ph’,‘change’,mPrev);
-document.querySelectorAll(‘input[name=“mp”]’).forEach(function(r){r.addEventListener(‘change’,mPrev);});
-mPrev();
-on(‘btn-m-send’,‘click’,function(){wa(mBuild());});
+  // ════════════════════════════════════════
+  // MOSHR
+  // ════════════════════════════════════════
+  function mBuild() {
+    var per = document.querySelector('input[name="mp"]:checked');
+    var ph = el('m-ph');
+    var m = '';
+    m += '📊 *مؤشر المناوبة — قطاع الوسط*\n';
+    m += '📅 '+(gv('m-d')||'—')+'   🕐 '+(per?per.value:'—')+'\n';
+    m += '⏱ متوسط وقت الاستجابة: *'+(gv('m-r')||'—')+'*\n';
+    if(ph&&ph.value) m+='\n'+ph.value;
+    return m;
+  }
+  function mPrev(){ var e=el('m-prev'); if(e) e.textContent=mBuild(); }
+  on('m-d','input',mPrev);
+  on('m-r','input',mPrev);
+  on('m-ph','change',mPrev);
+  document.querySelectorAll('input[name="mp"]').forEach(function(r){r.addEventListener('change',mPrev);});
+  mPrev();
+  on('btn-m-send','click',function(){wa(mBuild());});
 
-// ════════════════════════════════════════
-// OIL
-// ════════════════════════════════════════
-on(‘btn-o-add’,‘click’,function(){
-var c=el(‘o-list’); if(!c) return;
-var d=mk(‘div’); d.className=‘irow’;
-var del=mk(‘button’,{textContent:‘✕ حذف’}); del.className=‘del’;
-del.addEventListener(‘click’,function(){d.parentNode.removeChild(d);});
-d.appendChild(del);
-[[‘نداء الفرقة’,‘نداء الفرقة’],
-[‘رقم اللوحة’,‘رقم اللوحة’],
-[‘العداد الحالي (كم)’,‘كم’],
-[‘الموعد القادم لتغيير الزيت (كم)’,‘كم’]
-].forEach(function(f,i){
-var row=mk(‘div’); row.className=‘ff’; if(i<3) row.style.marginBottom=‘7px’;
-row.appendChild(mk(‘label’,{textContent:f[0]}));
-row.appendChild(mk(‘input’,{type:‘text’,placeholder:f[1]}));
-d.appendChild(row);
-});
-c.appendChild(d);
-});
-on(‘btn-o-send’,‘click’,function(){
-var m=’’;
-m+=‘🛢 *نموذج تغيير الزيت*\n’;
-m+=‘📅 التاريخ: *’+(gv(‘o-d’)||’—’)+’*\n’;
-var rows=document.querySelectorAll(’#o-list .irow’);
-if(!rows.length){ m+=’\n_لم يتم إدخال أي مركبة_\n’; }
-[].forEach.call(rows,function(row,i){
-var f=row.querySelectorAll(‘input’);
-m+=’\n🚑 *مركبة ‘+(i+1)+’*\n’;
-m+=‘📻 نداء الفرقة: *’+(f[0]?f[0].value.trim()||’—’:’—’)+’*\n’;
-m+=‘🔢 رقم اللوحة: *’+(f[1]?f[1].value.trim()||’—’:’—’)+’*\n’;
-m+=‘📏 العداد الحالي: *’+(f[2]?f[2].value.trim()||’—’:’—’)+’ كم*\n’;
-m+=‘🗓 الموعد القادم: *’+(f[3]?f[3].value.trim()||’—’:’—’)+’ كم*\n’;
-});
-var n=gv(‘o-n’); if(n){ m+=’\n📝 *ملاحظات*\n’+n; }
-wa(m);
-});
+  // ════════════════════════════════════════
+  // OIL
+  // ════════════════════════════════════════
+  on('btn-o-add','click',function(){
+    var c=el('o-list'); if(!c) return;
+    var d=mk('div'); d.className='irow';
+    var del=mk('button',{textContent:'✕ حذف'}); del.className='del';
+    del.addEventListener('click',function(){d.parentNode.removeChild(d);});
+    d.appendChild(del);
+    [['نداء الفرقة','نداء الفرقة'],
+     ['رقم اللوحة','رقم اللوحة'],
+     ['العداد الحالي (كم)','كم'],
+     ['الموعد القادم لتغيير الزيت (كم)','كم']
+    ].forEach(function(f,i){
+      var row=mk('div'); row.className='ff'; if(i<3) row.style.marginBottom='7px';
+      row.appendChild(mk('label',{textContent:f[0]}));
+      row.appendChild(mk('input',{type:'text',placeholder:f[1]}));
+      d.appendChild(row);
+    });
+    c.appendChild(d);
+  });
+  on('btn-o-send','click',function(){
+    var m='';
+    m+='🛢 *نموذج تغيير الزيت*\n';
+    m+='📅 التاريخ: *'+(gv('o-d')||'—')+'*\n';
+    var rows=document.querySelectorAll('#o-list .irow');
+    if(!rows.length){ m+='\n_لم يتم إدخال أي مركبة_\n'; }
+    [].forEach.call(rows,function(row,i){
+      var f=row.querySelectorAll('input');
+      m+='\n🚑 *مركبة '+(i+1)+'*\n';
+      m+='📻 نداء الفرقة: *'+(f[0]?f[0].value.trim()||'—':'—')+'*\n';
+      m+='🔢 رقم اللوحة: *'+(f[1]?f[1].value.trim()||'—':'—')+'*\n';
+      m+='📏 العداد الحالي: *'+(f[2]?f[2].value.trim()||'—':'—')+' كم*\n';
+      m+='🗓 الموعد القادم: *'+(f[3]?f[3].value.trim()||'—':'—')+' كم*\n';
+    });
+    var n=gv('o-n'); if(n){ m+='\n📝 *ملاحظات*\n'+n; }
+    wa(m);
+  });
 
-// ════════════════════════════════════════
-// DEVICE
-// ════════════════════════════════════════
-on(‘btn-d-add’,‘click’,function(){
-var c=el(‘d-list’); if(!c) return;
-var d=mk(‘div’); d.className=‘irow’;
-var del=mk(‘button’,{textContent:‘✕ حذف’}); del.className=‘del’;
-del.addEventListener(‘click’,function(){d.parentNode.removeChild(d);});
-d.appendChild(del);
-[[‘اسم الجهاز’,‘اسم الجهاز’],
-[‘السيريال نمبر’,‘Serial No.’],
-[‘العطل / المشكلة’,‘وصف المشكلة’]
-].forEach(function(f,i){
-var row=mk(‘div’); row.className=‘ff’; if(i<2) row.style.marginBottom=‘7px’;
-row.appendChild(mk(‘label’,{textContent:f[0]}));
-row.appendChild(mk(‘input’,{type:‘text’,placeholder:f[1]}));
-d.appendChild(row);
-});
-c.appendChild(d);
-});
-on(‘btn-d-send’,‘click’,function(){
-var m=’’;
-m+=‘🔧 *نموذج صيانة جهاز*\n’;
-m+=‘📅 التاريخ: *’+(gv(‘d-d’)||’—’)+’*\n’;
-var rows=document.querySelectorAll(’#d-list .irow’);
-if(!rows.length){ m+=’\n_لم يتم إدخال أي جهاز_\n’; }
-[].forEach.call(rows,function(row,i){
-var f=row.querySelectorAll(‘input’);
-m+=’\n🔧 *جهاز ‘+(i+1)+’*\n’;
-m+=‘📛 الجهاز: *’+(f[0]?f[0].value.trim()||’—’:’—’)+’*\n’;
-m+=‘🔖 السيريال: *’+(f[1]?f[1].value.trim()||’—’:’—’)+’*\n’;
-m+=‘⚠️ العطل: *’+(f[2]?f[2].value.trim()||’—’:’—’)+’*\n’;
-});
-var n=gv(‘d-n’); if(n){ m+=’\n📝 *ملاحظات*\n’+n; }
-wa(m);
-});
+  // ════════════════════════════════════════
+  // DEVICE
+  // ════════════════════════════════════════
+  on('btn-d-add','click',function(){
+    var c=el('d-list'); if(!c) return;
+    var d=mk('div'); d.className='irow';
+    var del=mk('button',{textContent:'✕ حذف'}); del.className='del';
+    del.addEventListener('click',function(){d.parentNode.removeChild(d);});
+    d.appendChild(del);
+    [['اسم الجهاز','اسم الجهاز'],
+     ['السيريال نمبر','Serial No.'],
+     ['العطل / المشكلة','وصف المشكلة']
+    ].forEach(function(f,i){
+      var row=mk('div'); row.className='ff'; if(i<2) row.style.marginBottom='7px';
+      row.appendChild(mk('label',{textContent:f[0]}));
+      row.appendChild(mk('input',{type:'text',placeholder:f[1]}));
+      d.appendChild(row);
+    });
+    c.appendChild(d);
+  });
+  on('btn-d-send','click',function(){
+    var m='';
+    m+='🔧 *نموذج صيانة جهاز*\n';
+    m+='📅 التاريخ: *'+(gv('d-d')||'—')+'*\n';
+    var rows=document.querySelectorAll('#d-list .irow');
+    if(!rows.length){ m+='\n_لم يتم إدخال أي جهاز_\n'; }
+    [].forEach.call(rows,function(row,i){
+      var f=row.querySelectorAll('input');
+      m+='\n🔧 *جهاز '+(i+1)+'*\n';
+      m+='📛 الجهاز: *'+(f[0]?f[0].value.trim()||'—':'—')+'*\n';
+      m+='🔖 السيريال: *'+(f[1]?f[1].value.trim()||'—':'—')+'*\n';
+      m+='⚠️ العطل: _'+(f[2]?f[2].value.trim()||'—':'—')+'_\n';
+    });
+    var n=gv('d-n'); if(n){ m+='\n📝 *ملاحظات*\n'+n; }
+    wa(m);
+  });
 
-// ════════════════════════════════════════
-// VM
-// ════════════════════════════════════════
-on(‘btn-v-add’,‘click’,function(){
-var c=el(‘v-faults’); if(!c) return;
-var d=mk(‘div’); d.className=‘irow’;
-var del=mk(‘button’,{textContent:‘✕ حذف’}); del.className=‘del’;
-del.addEventListener(‘click’,function(){d.parentNode.removeChild(d);});
-d.appendChild(del);
-var r1=mk(‘div’); r1.className=‘ff’; r1.style.marginBottom=‘7px’;
-r1.appendChild(mk(‘label’,{textContent:‘وصف العطل’}));
-r1.appendChild(mk(‘input’,{type:‘text’,placeholder:‘وصف العطل’}));
-d.appendChild(r1);
-var r2=mk(‘div’); r2.className=‘ff’;
-r2.appendChild(mk(‘label’,{textContent:‘الشدة’}));
-var sel=mk(‘select’);
-[‘بسيط’,‘متوسط’,‘خطير’].forEach(function(o){sel.appendChild(mk(‘option’,{textContent:o,value:o}));});
-r2.appendChild(sel); d.appendChild(r2);
-c.appendChild(d);
-});
-on(‘btn-v-send’,‘click’,function(){
-var pE={‘عادية’:‘🟢’,‘عاجلة’:‘🟡’,‘حرجة’:‘🔴’};
-var sE={‘بسيط’:‘🟡’,‘متوسط’:‘🟠’,‘خطير’:‘🔴’};
-var pri=gv(‘v-pri’)||‘عادية’;
-var m=’’;
-m+=‘🚑 *نموذج صيانة مركبة*\n’;
-m+=‘📅 التاريخ: *’+(gv(‘v-d’)||’—’)+’*\n’;
-m+=’\n🚗 *بيانات المركبة*\n’;
-m+=‘🔢 رقم المركبة: *’+(gv(‘v-num’)||’—’)+’*\n’;
-m+=‘🏷 النوع: *’+(gv(‘v-typ’)||’—’)+’*\n’;
-m+=‘📏 العداد: *’+(gv(‘v-km’)||’—’)+’ كم*\n’;
-m+=(pE[pri]||‘⚪’)+’ الأولوية: *’+pri+’*\n’;
-var rows=document.querySelectorAll(’#v-faults .irow’);
-if(rows.length){
-m+=’\n⚠️ *الأعطال*\n’;
-[].forEach.call(rows,function(row,i){
-var f=row.querySelector(‘input’), s=row.querySelector(‘select’);
-m+=(i+1)+’. ‘+(f?f.value.trim():’—’)+’  ‘+(sE[s?s.value:’’]||‘⚪’)+’ *’+(s?s.value:’—’)+’*\n’;
-});
-}
-var n=gv(‘v-n’); if(n){ m+=’\n📝 *ملاحظات*\n’+n; }
-wa(m);
-});
+  // ════════════════════════════════════════
+  // VM
+  // ════════════════════════════════════════
+  on('btn-v-add','click',function(){
+    var c=el('v-faults'); if(!c) return;
+    var d=mk('div'); d.className='irow';
+    var del=mk('button',{textContent:'✕ حذف'}); del.className='del';
+    del.addEventListener('click',function(){d.parentNode.removeChild(d);});
+    d.appendChild(del);
+    var r1=mk('div'); r1.className='ff'; r1.style.marginBottom='7px';
+    r1.appendChild(mk('label',{textContent:'وصف العطل'}));
+    r1.appendChild(mk('input',{type:'text',placeholder:'وصف العطل'}));
+    d.appendChild(r1);
+    var r2=mk('div'); r2.className='ff';
+    r2.appendChild(mk('label',{textContent:'الشدة'}));
+    var sel=mk('select');
+    ['بسيط','متوسط','خطير'].forEach(function(o){sel.appendChild(mk('option',{textContent:o,value:o}));});
+    r2.appendChild(sel); d.appendChild(r2);
+    c.appendChild(d);
+  });
+  on('btn-v-send','click',function(){
+    var pE={'عادية':'🟢','عاجلة':'🟡','حرجة':'🔴'};
+    var sE={'بسيط':'🟡','متوسط':'🟠','خطير':'🔴'};
+    var pri=gv('v-pri')||'عادية';
+    var m='';
+    m+='🚑 *نموذج صيانة مركبة*\n';
+    m+='📅 التاريخ: *'+(gv('v-d')||'—')+'*\n';
+    m+='\n🚗 *بيانات المركبة*\n';
+    m+='🔢 رقم المركبة: *'+(gv('v-num')||'—')+'*\n';
+    m+='🏷 النوع: *'+(gv('v-typ')||'—')+'*\n';
+    m+='📏 العداد: *'+(gv('v-km')||'—')+' كم*\n';
+    m+=(pE[pri]||'⚪')+' الأولوية: *'+pri+'*\n';
+    var rows=document.querySelectorAll('#v-faults .irow');
+    if(rows.length){
+      m+='\n⚠️ *الأعطال*\n';
+      [].forEach.call(rows,function(row,i){
+        var f=row.querySelector('input'), s=row.querySelector('select');
+        m+=(i+1)+'. '+(f?f.value.trim():'—')+'  '+(sE[s?s.value:'']||'⚪')+' *'+(s?s.value:'—')+'*\n';
+      });
+    }
+    var n=gv('v-n'); if(n){ m+='\n📝 *ملاحظات*\n'+n; }
+    wa(m);
+  });
 
-// ════════════════════════════════════════
-// ROSC
-// ════════════════════════════════════════
-var rCount=0;
-var arN=[‘١’,‘٢’,‘٣’,‘٤’,‘٥’,‘٦’,‘٧’,‘٨’,‘٩’,‘١٠’];
+  // ════════════════════════════════════════
+  // ROSC
+  // ════════════════════════════════════════
+  var rCount=0;
+  var arN=['١','٢','٣','٤','٥','٦','٧','٨','٩','١٠'];
 
-on(‘btn-r-add’,‘click’,function(){
-if(rCount>=10) return;
-rCount++;
-var c=el(‘r-names’); if(!c) return;
-var d=mk(‘div’); d.className=‘nr’;
-var nn=mk(‘span’,{textContent:arN[rCount-1]}); nn.className=‘nn’;
-var inp=mk(‘input’,{type:‘text’,placeholder:‘الاسم’},‘flex:1;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;direction:rtl;background:#f9fbfc;’);
-var del=mk(‘button’,{textContent:‘✕’}); del.className=‘rm’;
-del.addEventListener(‘click’,function(){
-d.parentNode.removeChild(d); rCount–;
-var ab=el(‘btn-r-add’); if(ab) ab.style.display=’’;
-document.querySelectorAll(’#r-names .nn’).forEach(function(e,i){e.textContent=arN[i]||(i+1)+’’;});
-});
-d.appendChild(nn); d.appendChild(inp); d.appendChild(del);
-c.appendChild(d); inp.focus();
-if(rCount>=10){var ab=el(‘btn-r-add’);if(ab)ab.style.display=‘none’;}
-});
+  on('btn-r-add','click',function(){
+    if(rCount>=10) return;
+    rCount++;
+    var c=el('r-names'); if(!c) return;
+    var d=mk('div'); d.className='nr';
+    var nn=mk('span',{textContent:arN[rCount-1]}); nn.className='nn';
+    var inp=mk('input',{type:'text',placeholder:'الاسم'},'flex:1;border:1px solid #d5e8f0;border-radius:6px;padding:6px 8px;font-size:.84rem;font-family:inherit;direction:rtl;background:#f9fbfc;');
+    var del=mk('button',{textContent:'✕'}); del.className='rm';
+    del.addEventListener('click',function(){
+      d.parentNode.removeChild(d); rCount--;
+      var ab=el('btn-r-add'); if(ab) ab.style.display='';
+      document.querySelectorAll('#r-names .nn').forEach(function(e,i){e.textContent=arN[i]||(i+1)+'';});
+    });
+    d.appendChild(nn); d.appendChild(inp); d.appendChild(del);
+    c.appendChild(d); inp.focus();
+    if(rCount>=10){var ab=el('btn-r-add');if(ab)ab.style.display='none';}
+  });
 
-on(‘btn-r-send’,‘click’,function(){
-var rosc=gv(‘r-ro’)||‘نعم’, lucas=gv(‘r-lu’)||‘نعم’;
-var m=’’;
-m+=‘❤️ *نموذج ROSC*\n’;
-m+=‘⏰ توقيت البلاغ: *’+(gv(‘r-ti’)||’—’)+’*\n’;
-m+=‘🏷 نوع البلاغ: *’+(gv(‘r-ty’)||’—’)+’*\n’;
-m+=‘📍 موقع البلاغ: *’+(gv(‘r-lo’)||’—’)+’*\n’;
-m+=‘⚡ زمن الاستجابة: *’+(gv(‘r-re’)||’—’)+’*\n’;
-m+=’\n🚑 *الوحدات المستجيبة*\n’;
-var un=gv(‘r-un’);
-if(un) un.split(’\n’).forEach(function(x){if(x.trim())m+=’• ‘+x.trim()+’\n’;});
-m+=’\n✅ *نتائج التدخل*\n’;
-m+=‘💓 هل تحقق ROSC؟ *’+rosc+(rosc===‘نعم’?’ 👏’:’’)+’*\n’;
-m+=‘🤖 هل تم استخدام جهاز لوكس؟ *’+lucas+(lucas===‘نعم’?’ ✅’:’’)+’*\n’;
-m+=’\nعمل عظيم يجسد الإخلاص والاحترافية في العمل 🌟\n’;
-m+=‘بكل فخر واعتزاز نتقدم بجزيل الشكر والعرفان لجهود الزملاء\n’;
-m+=‘الذين كان لهم — بعد توفيق الله — الفضل في نجاح عملية الإنعاش القلبي الرئوي\n\n’;
-var names=[].slice.call(document.querySelectorAll(’#r-names input’)).map(function(x){return x.value.trim();}).filter(Boolean);
-names.forEach(function(n,i){m+=arN[i]+’- *’+n+’*\n’;});
-if(names.length) m+=’\n’;
-m+=‘🎯 تحكم عملياتي: *’+(gv(‘r-op’)||’—’)+’*\n’;
-m+=‘🔗 تنسيق استجابة: *’+(gv(‘r-co’)||’—’)+’*\n’;
-m+=’\nجزاكم الله خيرًا وكتب أجركم وجعل ما قدمتموه في موازين حسناتكم 🌹’;
-wa(m);
-});
+  on('btn-r-send','click',function(){
+    var rosc=gv('r-ro')||'نعم', lucas=gv('r-lu')||'نعم';
+    var m='';
+    m+='❤️ *نموذج ROSC*\n';
+    m+='⏰ توقيت البلاغ: *'+(gv('r-ti')||'—')+'*\n';
+    m+='🏷 نوع البلاغ: *'+(gv('r-ty')||'—')+'*\n';
+    m+='📍 موقع البلاغ: *'+(gv('r-lo')||'—')+'*\n';
+    m+='⚡ زمن الاستجابة: *'+(gv('r-re')||'—')+'*\n';
+    m+='\n🚑 *الوحدات المستجيبة*\n';
+    var un=gv('r-un');
+    if(un) un.split('\n').forEach(function(x){if(x.trim())m+='• '+x.trim()+'\n';});
+    m+='\n✅ *نتائج التدخل*\n';
+    m+='💓 هل تحقق ROSC؟ *'+rosc+(rosc==='نعم'?' 👏':'')+'*\n';
+    m+='🤖 هل تم استخدام جهاز لوكس؟ *'+lucas+(lucas==='نعم'?' ✅':'')+'*\n';
+    m+='\nعمل عظيم يجسد الإخلاص والاحترافية في العمل 🌟\n';
+    m+='بكل فخر واعتزاز نتقدم بجزيل الشكر والعرفان لجهود الزملاء\n';
+    m+='الذين كان لهم — بعد توفيق الله — الفضل في نجاح عملية الإنعاش القلبي الرئوي\n\n';
+    var names=[].slice.call(document.querySelectorAll('#r-names input')).map(function(x){return x.value.trim();}).filter(Boolean);
+    names.forEach(function(n,i){m+=arN[i]+'- *'+n+'*\n';});
+    if(names.length) m+='\n';
+    m+='🎯 تحكم عملياتي: *'+(gv('r-op')||'—')+'*\n';
+    m+='🔗 تنسيق استجابة: *'+(gv('r-co')||'—')+'*\n';
+    m+='\nجزاكم الله خيرًا وكتب أجركم وجعل ما قدمتموه في موازين حسناتكم 🌹';
+    wa(m);
+  });
 
 }); // end DOMContentLoaded
+
 </script>
 
 </body>
